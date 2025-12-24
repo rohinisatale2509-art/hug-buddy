@@ -10,11 +10,21 @@ export default {
       colors: {
         primary: {
           DEFAULT: "hsl(var(--primary))",
+          light: "hsl(var(--primary-light))",
           dark: "hsl(var(--primary-dark))",
         },
         accent: "hsl(var(--accent))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        "accent-yellow": "hsl(var(--accent-yellow))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          dark: "hsl(var(--background-dark))",
+        },
+        foreground: {
+          DEFAULT: "hsl(var(--foreground))",
+          muted: "hsl(var(--foreground-muted))",
+        },
+        card: "hsl(var(--card))",
+        border: "hsl(var(--border))",
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
