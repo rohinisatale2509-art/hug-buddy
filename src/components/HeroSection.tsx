@@ -1,102 +1,94 @@
-import { useRef, useEffect, useState } from 'react'
+import heroBubbles from '../assets/hero-bubbles.png'
 
 export function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [videoLoaded, setVideoLoaded] = useState(false)
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {})
+  const features = [
+    {
+      icon: (
+        <svg viewBox="0 0 64 64" className="w-12 h-12" stroke="currentColor" fill="none" strokeWidth="1.5">
+          <path d="M32 8L8 20v24l24 12 24-12V20L32 8z" />
+          <path d="M8 20l24 12 24-12" />
+          <path d="M32 32v24" />
+        </svg>
+      ),
+      label: 'Technologies'
+    },
+    {
+      icon: (
+        <svg viewBox="0 0 64 64" className="w-12 h-12" stroke="currentColor" fill="none" strokeWidth="1.5">
+          <circle cx="32" cy="20" r="8" />
+          <circle cx="20" cy="44" r="8" />
+          <circle cx="44" cy="44" r="8" />
+          <path d="M32 28v8M24 40l4-4M40 40l-4-4" />
+        </svg>
+      ),
+      label: 'Services'
+    },
+    {
+      icon: (
+        <svg viewBox="0 0 64 64" className="w-12 h-12" stroke="currentColor" fill="none" strokeWidth="1.5">
+          <circle cx="32" cy="32" r="20" />
+          <circle cx="32" cy="32" r="8" />
+          <path d="M32 12v8M32 44v8M12 32h8M44 32h8" />
+        </svg>
+      ),
+      label: 'Innovations'
     }
-  }, [])
+  ]
 
   return (
-    <section className="relative min-h-screen w-full bg-gradient-to-r from-[#0C494E] to-[#005A64] overflow-hidden">
+    <section className="relative min-h-screen w-full gradient-primary overflow-hidden">
       {/* Yellow accent bar */}
-      <div className="absolute left-0 top-0 h-full w-1.5 bg-[#C4A962]" />
+      <div className="absolute left-0 top-0 h-full w-1.5 bg-accent-yellow z-20" />
       
-      {/* Subtle floating shapes for depth */}
-      <div className="absolute top-1/4 left-[10%] w-[500px] h-[500px] rounded-full bg-white/[0.02] blur-3xl" />
-      <div className="absolute bottom-1/4 right-[20%] w-[400px] h-[400px] rounded-full bg-white/[0.03] blur-3xl" />
-
       {/* Main content container */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 min-h-screen flex items-center">
-        <div className="w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-16 pt-24 lg:pt-0">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 min-h-screen">
+        <div className="flex flex-col lg:flex-row items-center min-h-screen pt-32 lg:pt-0">
           
           {/* Left Content */}
-          <div className="flex-1 space-y-8 text-center lg:text-left">
-            <h1 className="text-white font-bold leading-[0.95] tracking-tight">
+          <div className="flex-1 space-y-12">
+            <h1 className="text-foreground font-bold leading-[0.95] tracking-tight">
               <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-[110px]">Potential's</span>
               <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-[110px]">Energy</span>
             </h1>
             
-            <p className="text-white/85 text-lg lg:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              At Lummus, we make the world work better, bringing sustainable solutions to modern energy challenges.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-              <a
-                href="#solutions"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#0C494E] font-semibold rounded-full hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-black/10"
-              >
-                Explore Solutions
-              </a>
-              <a
-                href="#about"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-full border-2 border-white/40 hover:border-white/70 hover:bg-white/5 transition-all duration-300"
-              >
-                Learn More →
-              </a>
+            {/* Feature Icons */}
+            <div className="flex gap-6 pt-8">
+              {features.map((feature) => (
+                <div key={feature.label} className="text-center">
+                  <div className="icon-circle text-foreground mx-auto mb-3">
+                    {feature.icon}
+                  </div>
+                  <span className="text-foreground/90 text-sm font-medium">{feature.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Visual - Glass sphere with video */}
-          <div className="flex-shrink-0 w-full max-w-[380px] md:max-w-[480px] lg:max-w-[520px] xl:max-w-[580px]">
-            <div className="relative aspect-square">
-              {/* Outer glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent blur-2xl scale-110" />
-              
-              {/* Glass container */}
-              <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 shadow-2xl">
-                {/* Inner glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
-                
-                {/* Loading state */}
-                {!videoLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 border-2 border-white/20 border-t-white/60 rounded-full animate-spin" />
-                  </div>
-                )}
-                
-                {/* Video */}
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  onLoadedData={() => setVideoLoaded(true)}
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/videos/hero-animation.mp4" type="video/mp4" />
-                </video>
-                
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0C494E]/30 via-transparent to-transparent pointer-events-none" />
-              </div>
-              
-              {/* Decorative ring */}
-              <div className="absolute -inset-4 rounded-[2.5rem] border border-white/10 pointer-events-none" />
+          {/* Right Content */}
+          <div className="flex-1 relative flex flex-col items-center lg:items-end gap-8 py-12 lg:py-0">
+            {/* Glass Bubbles Image */}
+            <div className="relative w-full max-w-[500px]">
+              <img 
+                src={heroBubbles} 
+                alt="Abstract 3D glass bubbles representing innovation and energy"
+                className="w-full h-auto"
+              />
+            </div>
+            
+            {/* Description Text */}
+            <div className="max-w-md text-center lg:text-left lg:absolute lg:bottom-32 lg:right-0">
+              <p className="text-foreground/85 text-lg leading-relaxed mb-6">
+                At Lummus, we make the world work better, bringing together the best minds in science, technology, and business. Together, we give potential the energy to transform possibility into progress.
+              </p>
+              <a
+                href="#about"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-foreground/10 text-foreground font-medium rounded-full border border-foreground/30 hover:bg-foreground/20 hover:border-foreground/50 transition-all duration-300"
+              >
+                Who we are
+              </a>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 animate-bounce">
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
       </div>
     </section>
   )
