@@ -10,10 +10,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <HeroSection 
-        title="About Lummus Technology"
-        subtitle="Over a century of innovation transforming the process industries"
-      />
+      <HeroSection />
       
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
